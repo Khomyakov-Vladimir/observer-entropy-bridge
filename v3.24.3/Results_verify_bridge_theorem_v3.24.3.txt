@@ -1,0 +1,355 @@
+# Reproducibility run  2026-06-11T12:24:11.086167
+# Python: 3.12.3
+# Script: verify_bridge_theorem_v3.24.3.py
+# Working directory: e:\Projects\observer_entropy_bridge_theorem_v3.24.3
+# Invocation: python scripts/verify_bridge_theorem_v3.24.3.py
+# Recommended invocation (from repository root):
+# python scripts/verify_bridge_theorem_v3.24.3.py
+
+================================================================================
+  NUMERICAL VERIFICATION (v3.24.3)
+
+  Theorem 6.7 (Bridge Theorem) +
+  Section 11 (Fibre-Theoretic Foundation, Theorem 11.9)
+
+  Paper: 'KL-Geometric Structure of Observer Entropy', v3.24.3
+  Author: Vladimir Khomyakov
+================================================================================
+
+================================================================================
+  EXAMPLE 1: 4-POINT SPACE  X={1,2,3,4}, P={{1,2},{3,4}}
+================================================================================
+
+[T5] Fisher matrix verification (Example 1)
+  [PASS] Ex1 Fisher: analytic vs. FD agree  (max|dI| = 9.10e-12 < 1e-08)
+  [PASS] Ex1 Fisher: I(theta*) = diag(1, 1/2, 1/2) confirmed  (max|dI| = 0.00e+00)
+  Analytic I(theta*):
+[[1.  0.  0. ]
+ [0.  0.5 0. ]
+ [0.  0.  0.5]]
+  Numerical I(theta*):
+[[1.  0.  0. ]
+ [0.  0.5 0. ]
+ [0.  0.  0.5]]
+
+  Closed-form consistency check (Proposition 6.24):
+  [PASS] Ex1 (a=1.0,b=0.0): closed-form 1/4(a^2+b^2) = Fisher prediction
+  [PASS] Ex1 (a=0.0,b=1.0): closed-form 1/4(a^2+b^2) = Fisher prediction
+  [PASS] Ex1 (a=1.0,b=1.0): closed-form 1/4(a^2+b^2) = Fisher prediction
+  [PASS] Ex1 (a=3.0,b=2.0): closed-form 1/4(a^2+b^2) = Fisher prediction
+
+[T1,T2] Exact S_obs and Quadratic Prediction (summary table):
+
+    a     b        eps     S_obs(exact)      S_obs(pred)    rel.error    |R|/eps^3       E_min(J) STATUS
+--------------------------------------------------------------------------------------------------------
+  1.0   0.0    1.0e-04   2.50000002e-09   2.50000000e-09   8.6026e-09     0.000022   1.035487e-29   PASS
+  1.0   0.0    1.0e-03   2.49999938e-07   2.50000000e-07   2.4967e-07     0.000062   1.035486e-27   PASS
+  1.0   0.0    1.0e-02   2.49993750e-05   2.50000000e-05   2.5000e-05     0.000625   1.035461e-25   PASS
+  1.0   0.0    1.0e-01   2.49376386e-03   2.50000000e-03   2.5007e-03     0.006236   1.032904e-23   PASS
+  0.0   1.0    1.0e-04   2.50000002e-09   2.50000000e-09   8.6026e-09     0.000022   1.035487e-29   PASS
+  0.0   1.0    1.0e-03   2.49999938e-07   2.50000000e-07   2.4978e-07     0.000062   1.035486e-27   PASS
+  0.0   1.0    1.0e-02   2.49993750e-05   2.50000000e-05   2.5000e-05     0.000625   1.035461e-25   PASS
+  0.0   1.0    1.0e-01   2.49376386e-03   2.50000000e-03   2.5007e-03     0.006236   1.032904e-23   PASS
+  1.0   1.0    1.0e-04   4.99999997e-09   5.00000000e-09   5.0000e-09     0.000025   2.070973e-29   PASS
+  1.0   1.0    1.0e-03   4.99999750e-07   5.00000000e-07   5.0011e-07     0.000250   2.070972e-27   PASS
+  1.0   1.0    1.0e-02   4.99975001e-05   5.00000000e-05   5.0000e-05     0.002500   2.070870e-25   PASS
+  1.0   1.0    1.0e-01   4.97511064e-03   5.00000000e-03   5.0028e-03     0.024889   2.060664e-23   PASS
+  3.0   2.0    1.0e-04   3.24999989e-08   3.25000000e-08   3.3354e-08     0.001084   1.346133e-28   PASS
+  3.0   2.0    1.0e-03   3.24998944e-06   3.25000000e-06   3.2500e-06     0.010562   1.346128e-26   PASS
+  3.0   2.0    1.0e-02   3.24894406e-04   3.25000000e-04   3.2501e-04     0.105594   1.345695e-24   PASS
+  3.0   2.0    1.0e-01   3.14734427e-02   3.25000000e-02   3.2617e-02     1.026557   1.303613e-22   PASS
+
+[T3] Remainder bound  |R(eps)|/eps^3  (must be <= 10 for eps in [1e-4, 1e-2]):
+  [PASS] Ex1 (a=1.0,b=0.0): sup|R|/eps^3 = 0.000611  (< 10.0)
+  [PASS] Ex1 (a=0.0,b=1.0): sup|R|/eps^3 = 0.000611  (< 10.0)
+  [PASS] Ex1 (a=1.0,b=1.0): sup|R|/eps^3 = 0.002443  (< 10.0)
+  [PASS] Ex1 (a=3.0,b=2.0): sup|R|/eps^3 = 0.103180  (< 10.0)
+
+[T4] Relative error criterion: rel.err(eps) <= 0.8*eps for eps <= 0.03:
+  [PASS] Ex1 (a=1.0,b=0.0): rel.err <= 0.8*eps verified for eps<=0.03  (observed C_* = 0.0074 <= 0.8)
+  [PASS] Ex1 (a=1.0,b=0.0): rel.err log-log slope = 2.0000  (O(eps^2.00) confirmed)
+  [PASS] Ex1 (a=0.0,b=1.0): rel.err <= 0.8*eps verified for eps<=0.03  (observed C_* = 0.0074 <= 0.8)
+  [PASS] Ex1 (a=0.0,b=1.0): rel.err log-log slope = 2.0000  (O(eps^2.00) confirmed)
+  [PASS] Ex1 (a=1.0,b=1.0): rel.err <= 0.8*eps verified for eps<=0.03  (observed C_* = 0.0148 <= 0.8)
+  [PASS] Ex1 (a=1.0,b=1.0): rel.err log-log slope = 2.0001  (O(eps^2.00) confirmed)
+  [PASS] Ex1 (a=3.0,b=2.0): rel.err <= 0.8*eps verified for eps<=0.03  (observed C_* = 0.0965 <= 0.8)
+  [PASS] Ex1 (a=3.0,b=2.0): rel.err log-log slope = 2.0004  (O(eps^2.00) confirmed)
+
+[T6] Log-log scaling slope (must be 2.0 +/- 0.01):
+  [PASS] Ex1 (a=1.0,b=0.0): log-log slope = 1.999862  (|slope-2| = 1.38e-04 < 0.01)
+  [PASS] Ex1 (a=0.0,b=1.0): log-log slope = 1.999862  (|slope-2| = 1.38e-04 < 0.01)
+  [PASS] Ex1 (a=1.0,b=1.0): log-log slope = 1.999725  (|slope-2| = 2.75e-04 < 0.01)
+  [PASS] Ex1 (a=3.0,b=2.0): log-log slope = 1.998220  (|slope-2| = 1.78e-03 < 0.01)
+
+[T7] Landauer bound (S_obs >= 0):
+  [PASS] Ex1 (a=1.0,b=0.0): Landauer bound satisfied  (min S_obs = 2.500e-09 >= 0)
+  [PASS] Ex1 (a=0.0,b=1.0): Landauer bound satisfied  (min S_obs = 2.500e-09 >= 0)
+  [PASS] Ex1 (a=1.0,b=1.0): Landauer bound satisfied  (min S_obs = 5.000e-09 >= 0)
+  [PASS] Ex1 (a=3.0,b=2.0): Landauer bound satisfied  (min S_obs = 3.250e-08 >= 0)
+
+    Minimum energetic cost at T = 300.0 K  (eps = 0.01):
+    (a,b) = (1.0,0.0):  E_min = 1.035461e-25 J
+    (a,b) = (0.0,1.0):  E_min = 1.035461e-25 J
+    (a,b) = (1.0,1.0):  E_min = 2.070870e-25 J
+    (a,b) = (3.0,2.0):  E_min = 1.345695e-24 J
+
+[T8] Resolution-information trade-off: S_obs(eps) monotone increasing:
+  [PASS] Ex1 (a=1,b=1): monotone non-decrease verified (0 violations)
+
+================================================================================
+  EXAMPLE 2: 5-POINT SPACE  X={1,2,3,4,5}, P={{1,2,3},{4,5}}
+================================================================================
+
+[T5] Fisher matrix verification (Example 2)
+  [PASS] Ex2 Fisher: analytic vs. FD agree  (max|dI| = 1.97e-11 < 1e-08)
+  [PASS] Ex2 Fisher: I(theta*) = diag(3/2, 6/5, 2/5, 2/5) confirmed  (max|dI| = 4.44e-16)
+  [PASS] Ex2 Fisher: matches manual covariance formula  (max|dI| = 0.00e+00)
+  Analytic I(theta*):
+[[1.5 0.  0.  0. ]
+ [0.  1.2 0.  0. ]
+ [0.  0.  0.4 0. ]
+ [0.  0.  0.  0.4]]
+  Numerical I(theta*):
+[[ 1.50000000e+00  1.13317282e-23  0.00000000e+00  3.33072459e-12]
+ [ 1.13301126e-23  1.20000000e+00  0.00000000e+00 -2.95822890e-22]
+ [ 0.00000000e+00  0.00000000e+00  4.00000000e-01  0.00000000e+00]
+ [ 3.33066907e-12 -2.95822890e-22  0.00000000e+00  4.00000000e-01]]
+  Eigenvalues: [1.5 1.2 0.4 0.4]  (paper: 3/2=1.5, 6/5=1.2, 2/5=0.4, 2/5=0.4)
+
+  Closed-form consistency check (Proposition 6.38, eq. (14)):
+  [PASS] Ex2 (a=1.0,b=0.0,g=0.0): closed-form = Fisher prediction
+  [PASS] Ex2 (a=0.0,b=1.0,g=0.0): closed-form = Fisher prediction
+  [PASS] Ex2 (a=0.0,b=0.0,g=1.0): closed-form = Fisher prediction
+  [PASS] Ex2 (a=1.0,b=1.0,g=1.0): closed-form = Fisher prediction
+  [PASS] Ex2 (a=2.0,b=1.0,g=3.0): closed-form = Fisher prediction
+
+[T1,T2] Exact S_obs and Quadratic Prediction (summary table):
+
+    a     b     g        eps     S_obs(exact)      S_obs(pred)    rel.error    |R|/eps^3       E_min(J) STATUS
+--------------------------------------------------------------------------------------------------------------
+  1.0   0.0   0.0    1.0e-04   5.99959993e-09   6.00000000e-09   6.6682e-05     0.400065   2.485002e-29   PASS
+  1.0   0.0   0.0    1.0e-03   5.99599790e-07   6.00000000e-07   6.6746e-04     0.400210   2.483511e-27   PASS
+  1.0   0.0   0.0    1.0e-02   5.95979360e-05   6.00000000e-05   6.7463e-03     0.402064   2.468515e-25   PASS
+  1.0   0.0   0.0    1.0e-01   5.58254567e-03   6.00000000e-03   7.4778e-02     0.417454   2.312261e-23   PASS
+  0.0   1.0   0.0    1.0e-04   2.00000002e-09   2.00000000e-09   9.9352e-09     0.000020   8.283894e-30   PASS
+  0.0   1.0   0.0    1.0e-03   1.99999977e-07   2.00000000e-07   1.1667e-07     0.000023   8.283893e-28   PASS
+  0.0   1.0   0.0    1.0e-02   1.99997667e-05   2.00000000e-05   1.1667e-05     0.000233   8.283797e-26   PASS
+  0.0   1.0   0.0    1.0e-01   1.99766892e-03   2.00000000e-03   1.1669e-03     0.002331   8.274239e-24   PASS
+  0.0   0.0   1.0    1.0e-04   1.99999993e-09   2.00000000e-09   3.5307e-08     0.000071   8.283894e-30   PASS
+  0.0   0.0   1.0    1.0e-03   1.99999960e-07   2.00000000e-07   1.9989e-07     0.000040   8.283892e-28   PASS
+  0.0   0.0   1.0    1.0e-02   1.99996000e-05   2.00000000e-05   2.0000e-05     0.000400   8.283728e-26   PASS
+  0.0   0.0   1.0    1.0e-01   1.99600743e-03   2.00000000e-03   2.0003e-03     0.003993   8.267357e-24   PASS
+  1.0   1.0   1.0    1.0e-04   9.99999990e-09   1.00000000e-08   9.5540e-09     0.000096   4.141947e-29   PASS
+  1.0   1.0   1.0    1.0e-03   9.99999267e-07   1.00000000e-06   7.3329e-07     0.000733   4.141944e-27   PASS
+  1.0   1.0   1.0    1.0e-02   9.99926672e-05   1.00000000e-04   7.3334e-05     0.007333   4.141643e-25   PASS
+  1.0   1.0   1.0    1.0e-01   9.92717522e-03   1.00000000e-02   7.3359e-03     0.072825   4.111783e-23   PASS
+  2.0   1.0   3.0    1.0e-04   4.39975984e-08   4.40000000e-08   5.4586e-05     2.401632   1.822357e-28   PASS
+  2.0   1.0   3.0    1.0e-03   4.39758347e-06   4.40000000e-06   5.4951e-04     2.416527   1.821456e-26   PASS
+  2.0   1.0   3.0    1.0e-02   4.37436205e-04   4.40000000e-04   5.8610e-03     2.563795   1.811838e-24   PASS
+  2.0   1.0   3.0    1.0e-01   4.01500736e-02   4.40000000e-02   9.5888e-02     3.849926   1.662995e-22   PASS
+
+[T3] Remainder bound  |R(eps)|/eps^3  (must be <= 10 for eps in [1e-4, 1e-2]):
+  [PASS] Ex2 (a=1.0,b=0.0,g=0.0): sup|R|/eps^3 = 0.402018  (< 10.0)
+  [PASS] Ex2 (a=0.0,b=1.0,g=0.0): sup|R|/eps^3 = 0.000228  (< 10.0)
+  [PASS] Ex2 (a=0.0,b=0.0,g=1.0): sup|R|/eps^3 = 0.000391  (< 10.0)
+  [PASS] Ex2 (a=1.0,b=1.0,g=1.0): sup|R|/eps^3 = 0.007165  (< 10.0)
+  [PASS] Ex2 (a=2.0,b=1.0,g=3.0): sup|R|/eps^3 = 2.560086  (< 10.0)
+
+[T4] Relative error criterion: rel.err(eps) <= 0.8*eps for eps <= 0.03:
+  [PASS] Ex2 (a=1.0,b=0.0,g=0.0): rel.err <= 0.8*eps verified for eps<=0.03  (observed C_* = 0.6904 <= 0.8)
+  [PASS] Ex2 (a=1.0,b=0.0,g=0.0): rel.err log-log slope = 1.0193  (O(eps^1.02) confirmed)
+  [PASS] Ex2 (a=0.0,b=1.0,g=0.0): rel.err <= 0.8*eps verified for eps<=0.03  (observed C_* = 0.0035 <= 0.8)
+  [PASS] Ex2 (a=0.0,b=1.0,g=0.0): rel.err log-log slope = 2.0000  (O(eps^2.00) confirmed)
+  [PASS] Ex2 (a=0.0,b=0.0,g=1.0): rel.err <= 0.8*eps verified for eps<=0.03  (observed C_* = 0.0059 <= 0.8)
+  [PASS] Ex2 (a=0.0,b=0.0,g=1.0): rel.err log-log slope = 2.0000  (O(eps^2.00) confirmed)
+  [PASS] Ex2 (a=1.0,b=1.0,g=1.0): rel.err <= 0.8*eps verified for eps<=0.03  (observed C_* = 0.0218 <= 0.8)
+  [PASS] Ex2 (a=1.0,b=1.0,g=1.0): rel.err log-log slope = 2.0000  (O(eps^2.00) confirmed)
+  [PASS] Ex2 (a=2.0,b=1.0,g=3.0): rel.err <= 0.8*eps verified for eps<=0.03  (observed C_* = 0.6665 <= 0.8)
+  [PASS] Ex2 (a=2.0,b=1.0,g=3.0): rel.err log-log slope = 1.1013  (O(eps^1.10) confirmed)
+
+[T6] Log-log scaling slope (must be 2.0 +/- 0.01):
+  [PASS] Ex2 (a=1.0,b=0.0,g=0.0): log-log slope = 1.993673  (|slope-2| = 6.33e-03 < 0.01)
+  [PASS] Ex2 (a=0.0,b=1.0,g=0.0): log-log slope = 1.999936  (|slope-2| = 6.43e-05 < 0.01)
+  [PASS] Ex2 (a=0.0,b=0.0,g=1.0): log-log slope = 1.999890  (|slope-2| = 1.10e-04 < 0.01)
+  [PASS] Ex2 (a=1.0,b=1.0,g=1.0): log-log slope = 1.999596  (|slope-2| = 4.04e-04 < 0.01)
+  [PASS] Ex2 (a=2.0,b=1.0,g=3.0): log-log slope = 1.992995  (|slope-2| = 7.01e-03 < 0.01)
+
+[T7] Landauer bound (S_obs >= 0):
+  [PASS] Ex2 (a=1.0,b=0.0,g=0.0): Landauer bound satisfied  (min S_obs = 6.000e-09 >= 0)
+  [PASS] Ex2 (a=0.0,b=1.0,g=0.0): Landauer bound satisfied  (min S_obs = 2.000e-09 >= 0)
+  [PASS] Ex2 (a=0.0,b=0.0,g=1.0): Landauer bound satisfied  (min S_obs = 2.000e-09 >= 0)
+  [PASS] Ex2 (a=1.0,b=1.0,g=1.0): Landauer bound satisfied  (min S_obs = 1.000e-08 >= 0)
+  [PASS] Ex2 (a=2.0,b=1.0,g=3.0): Landauer bound satisfied  (min S_obs = 4.400e-08 >= 0)
+
+    Minimum energetic cost at T = 300.0 K  (eps = 0.01):
+    (a,b,g) = (1.0,0.0,0.0):  E_min = 2.468515e-25 J
+    (a,b,g) = (0.0,1.0,0.0):  E_min = 8.283797e-26 J
+    (a,b,g) = (0.0,0.0,1.0):  E_min = 8.283728e-26 J
+    (a,b,g) = (1.0,1.0,1.0):  E_min = 4.141643e-25 J
+    (a,b,g) = (2.0,1.0,3.0):  E_min = 1.811838e-24 J
+
+[T8] Resolution-information trade-off: S_obs(eps) monotone increasing:
+  [PASS] Ex2 (a=1,b=1,g=1): monotone non-decrease verified (0 violations)
+
+================================================================================
+  SECTION 9 (T9): OFF-CENTER BASE POINTS & RANDOM DIRECTIONS
+  Confirms Theorem 6.7 holds for theta* != 0  (locality check)
+================================================================================
+
+[T9.1] Example 1: 6 random (theta_1*, alpha, beta) pairs
+       theta(eps) = (theta_1*, eps*alpha, eps*beta),  v = (0, -alpha, -beta)
+  [PASS] Ex1-OC#1  theta_1*=+0.438  alpha=-0.811  beta=+0.585: log-log slope = 1.999844  (|slope-2| = 1.56e-04 < 0.01)
+  [PASS] Ex1-OC#1  theta_1*=+0.438  alpha=-0.811  beta=+0.585: sup|R|/eps^3 = 0.000780  (< 10.0)
+  [PASS] Ex1-OC#2  theta_1*=+0.316  alpha=-0.832  beta=-0.555: log-log slope = 1.999846  (|slope-2| = 1.54e-04 < 0.01)
+  [PASS] Ex1-OC#2  theta_1*=+0.316  alpha=-0.832  beta=-0.555: sup|R|/eps^3 = 0.000762  (< 10.0)
+  [PASS] Ex1-OC#3  theta_1*=+0.418  alpha=-0.999  beta=-0.053: log-log slope = 1.999808  (|slope-2| = 1.92e-04 < 0.01)
+  [PASS] Ex1-OC#3  theta_1*=+0.418  alpha=-0.999  beta=-0.053: sup|R|/eps^3 = 0.001185  (< 10.0)
+  [PASS] Ex1-OC#4  theta_1*=-0.079  alpha=+0.749  beta=+0.663: log-log slope = 1.999864  (|slope-2| = 1.36e-04 < 0.01)
+  [PASS] Ex1-OC#4  theta_1*=-0.079  alpha=+0.749  beta=+0.663: sup|R|/eps^3 = 0.000599  (< 10.0)
+  [PASS] Ex1-OC#5  theta_1*=+0.230  alpha=+0.924  beta=+0.383: log-log slope = 1.999840  (|slope-2| = 1.60e-04 < 0.01)
+  [PASS] Ex1-OC#5  theta_1*=+0.230  alpha=+0.924  beta=+0.383: sup|R|/eps^3 = 0.000821  (< 10.0)
+  [PASS] Ex1-OC#6  theta_1*=-0.436  alpha=+0.359  beta=-0.933: log-log slope = 1.999820  (|slope-2| = 1.80e-04 < 0.01)
+  [PASS] Ex1-OC#6  theta_1*=-0.436  alpha=+0.359  beta=-0.933: sup|R|/eps^3 = 0.001040  (< 10.0)
+
+[T9.2] Example 2: 6 random (theta_1*, alpha, beta, gamma) pairs
+       theta(eps) = (theta_1*, eps*alpha, eps*beta, eps*gamma)
+  [PASS] Ex2-OC#1  theta_1*=+0.524  alpha=-0.071  beta=-0.261  gamma=-0.963: log-log slope = 1.999707  (|slope-2| = 2.93e-04 < 0.01)
+  [PASS] Ex2-OC#1  theta_1*=+0.524  alpha=-0.071  beta=-0.261  gamma=-0.963: sup|R|/eps^3 = 0.002688  (< 10.0)
+  [PASS] Ex2-OC#2  theta_1*=+0.753  alpha=-0.268  beta=-0.744  gamma=-0.612: log-log slope = 1.997045  (|slope-2| = 2.96e-03 < 0.01)
+  [PASS] Ex2-OC#2  theta_1*=+0.753  alpha=-0.268  beta=-0.744  gamma=-0.612: sup|R|/eps^3 = 0.078722  (< 10.0)
+  [PASS] Ex2-OC#3  theta_1*=-0.053  alpha=+0.522  beta=+0.590  gamma=+0.616: log-log slope = 2.000315  (|slope-2| = 3.15e-04 < 0.01)
+  [PASS] Ex2-OC#3  theta_1*=-0.053  alpha=+0.522  beta=+0.590  gamma=+0.616: sup|R|/eps^3 = 0.014889  (< 10.0)
+  [PASS] Ex2-OC#4  theta_1*=+0.392  alpha=-0.389  beta=-0.491  gamma=-0.780: log-log slope = 1.999208  (|slope-2| = 7.92e-04 < 0.01)
+  [PASS] Ex2-OC#4  theta_1*=+0.392  alpha=-0.389  beta=-0.491  gamma=-0.780: sup|R|/eps^3 = 0.019003  (< 10.0)
+  [PASS] Ex2-OC#5  theta_1*=-0.049  alpha=+0.800  beta=-0.081  gamma=-0.595: log-log slope = 1.995850  (|slope-2| = 4.15e-03 < 0.01)
+  [PASS] Ex2-OC#5  theta_1*=-0.049  alpha=+0.800  beta=-0.081  gamma=-0.595: sup|R|/eps^3 = 0.193779  (< 10.0)
+  [PASS] Ex2-OC#6  theta_1*=-0.437  alpha=+0.577  beta=+0.659  gamma=+0.482: log-log slope = 2.000411  (|slope-2| = 4.11e-04 < 0.01)
+  [PASS] Ex2-OC#6  theta_1*=-0.437  alpha=+0.577  beta=+0.659  gamma=+0.482: sup|R|/eps^3 = 0.013127  (< 10.0)
+
+================================================================================
+  SECTION 11: FIBRE-THEORETIC FOUNDATION
+================================================================================
+
+[T11.1] Push-pull identity:  pi_* o pi^* = id_{P(X)}
+  [PASS] T11.1: n=3, N=2: max|q - pi_* pi^* q| = 0.00e+00
+  [PASS] T11.1: n=3, N=3: max|q - pi_* pi^* q| = 0.00e+00
+  [PASS] T11.1: n=4, N=2: max|q - pi_* pi^* q| = 0.00e+00
+  [PASS] T11.1: n=4, N=3: max|q - pi_* pi^* q| = 0.00e+00
+  [PASS] T11.1: n=5, N=2: max|q - pi_* pi^* q| = 0.00e+00
+  [PASS] T11.1: n=5, N=3: max|q - pi_* pi^* q| = 0.00e+00
+
+[T11.2] Idempotence of pi^* pi_*
+  [PASS] T11.2: n=3, N=2: max|(P^2-P) mu| = 0.00e+00
+  [PASS] T11.2: n=3, N=3: max|(P^2-P) mu| = 0.00e+00
+  [PASS] T11.2: n=4, N=2: max|(P^2-P) mu| = 0.00e+00
+  [PASS] T11.2: n=4, N=3: max|(P^2-P) mu| = 0.00e+00
+
+[T11.3] Closed-form identity S_obs^fib = log N - H_w(mu)  (balanced)
+  [PASS] T11.3: trial 1 (n=2, N=2): |direct - closed| = 1.943e-16
+  [PASS] T11.3: trial 2 (n=4, N=3): |direct - closed| = 0.000e+00
+  [PASS] T11.3: trial 3 (n=3, N=3): |direct - closed| = 1.665e-16
+  [PASS] T11.3: trial 4 (n=4, N=3): |direct - closed| = 1.110e-16
+  [PASS] T11.3: trial 5 (n=3, N=4): |direct - closed| = 2.776e-17
+  [PASS] T11.3: trial 6 (n=5, N=3): |direct - closed| = 3.886e-16
+  [PASS] T11.3: trial 7 (n=2, N=3): |direct - closed| = 2.220e-16
+  [PASS] T11.3: trial 8 (n=2, N=4): |direct - closed| = 1.110e-16
+
+[T11.4] Closed-form identity (unbalanced fibres)
+  [PASS] T11.4: Example 2 uniform (|A|=3,|B|=2): |direct-closed| = 1.998e-16
+  [PASS] T11.4: trial 1 (sizes=[2, 4, 2, 3]): |direct-closed| = 0.000e+00
+  [PASS] T11.4: trial 2 (sizes=[4, 4, 2]): |direct-closed| = 1.110e-16
+  [PASS] T11.4: trial 3 (sizes=[3, 3]): |direct-closed| = 1.388e-16
+  [PASS] T11.4: trial 4 (sizes=[4, 1, 4, 1]): |direct-closed| = 1.388e-17
+  [PASS] T11.4: trial 5 (sizes=[1, 4, 4]): |direct-closed| = 0.000e+00
+  [PASS] T11.4: trial 6 (sizes=[4, 1]): |direct-closed| = 5.551e-17
+
+[T11.5] Range:  0 <= S_obs^fib <= log N
+  [PASS] T11.5: trial 1 (n=4, N=3): S_obs = 0.179003 in [0, log(3)=1.0986]
+  [PASS] T11.5: trial 2 (n=2, N=3): S_obs = 0.212248 in [0, log(3)=1.0986]
+  [PASS] T11.5: trial 3 (n=4, N=2): S_obs = 0.369756 in [0, log(2)=0.6931]
+  [PASS] T11.5: trial 4 (n=3, N=2): S_obs = 0.133130 in [0, log(2)=0.6931]
+  [PASS] T11.5: trial 5 (n=4, N=3): S_obs = 0.163975 in [0, log(3)=1.0986]
+  [PASS] T11.5: trial 6 (n=3, N=3): S_obs = 0.458372 in [0, log(3)=1.0986]
+
+[T11.6] Equivalence: S_obs(p, eps) = S_obs^fib(p)  (Remark 11.11)
+  [PASS] T11.6 Ex1: (a=1.0,b=0.0), eps=0.01: |S_obs - S_obs^fib| = 1.78e-17
+  [PASS] T11.6 Ex1: (a=1.0,b=0.0), eps=0.05: |S_obs - S_obs^fib| = 6.07e-17
+  [PASS] T11.6 Ex1: (a=0.0,b=1.0), eps=0.01: |S_obs - S_obs^fib| = 1.78e-17
+  [PASS] T11.6 Ex1: (a=0.0,b=1.0), eps=0.05: |S_obs - S_obs^fib| = 6.07e-17
+  [PASS] T11.6 Ex1: (a=1.0,b=1.0), eps=0.01: |S_obs - S_obs^fib| = 7.55e-17
+  [PASS] T11.6 Ex1: (a=1.0,b=1.0), eps=0.05: |S_obs - S_obs^fib| = 4.16e-17
+  [PASS] T11.6 Ex1: (a=3.0,b=2.0), eps=0.01: |S_obs - S_obs^fib| = 1.11e-16
+  [PASS] T11.6 Ex1: (a=3.0,b=2.0), eps=0.05: |S_obs - S_obs^fib| = 1.84e-16
+  [PASS] T11.6 Ex2: (a=1.0,b=0.0,g=0.0), eps=0.01: |S_obs - S_obs^fib| = 1.24e-16
+  [PASS] T11.6 Ex2: (a=1.0,b=0.0,g=0.0), eps=0.05: |S_obs - S_obs^fib| = 1.47e-16
+  [PASS] T11.6 Ex2: (a=0.0,b=1.0,g=0.0), eps=0.01: |S_obs - S_obs^fib| = 4.33e-17
+  [PASS] T11.6 Ex2: (a=0.0,b=1.0,g=0.0), eps=0.05: |S_obs - S_obs^fib| = 7.01e-17
+  [PASS] T11.6 Ex2: (a=0.0,b=0.0,g=1.0), eps=0.01: |S_obs - S_obs^fib| = 1.03e-16
+  [PASS] T11.6 Ex2: (a=0.0,b=0.0,g=1.0), eps=0.05: |S_obs - S_obs^fib| = 3.95e-17
+  [PASS] T11.6 Ex2: (a=1.0,b=1.0,g=1.0), eps=0.01: |S_obs - S_obs^fib| = 7.26e-18
+  [PASS] T11.6 Ex2: (a=1.0,b=1.0,g=1.0), eps=0.05: |S_obs - S_obs^fib| = 5.12e-17
+  [PASS] T11.6 Ex2: (a=2.0,b=1.0,g=3.0), eps=0.01: |S_obs - S_obs^fib| = 6.72e-17
+  [PASS] T11.6 Ex2: (a=2.0,b=1.0,g=3.0), eps=0.05: |S_obs - S_obs^fib| = 6.94e-18
+
+
+================================================================================
+  FIGURE GENERATION: MANUSCRIPT FIGURES (v3.24.3)
+================================================================================
+  [SAVED] figures/fig1_bridge_theorem_verification.pdf + .png
+  [SAVED] figures/fig2_relative_error.pdf + .png
+  [SAVED] figures/fig3_resolution_information_tradeoff.pdf + .png
+  [SAVED] figures/fig4_bridge_theorem_ex2.pdf + .png
+  [SAVED] figures/fig5_relative_error_ex2.pdf + .png
+  [SAVED] figures/fig6_offcenter_ex1.pdf + .png
+  [SAVED] figures/fig7_offcenter_ex2.pdf + .png
+
+
+================================================================================
+  FIGURE GENERATION: SUPPLEMENTARY DIAGNOSTICS
+================================================================================
+  [SAVED] figures/fig_supp_fisher_eigenvalues.pdf + .png
+  [SAVED] figures/fig_supp_landauer_budget.pdf + .png
+  [SAVED] figures/fig_supp_fibre_identity.pdf + .png
+
+================================================================================
+  PASS  ALL VERIFICATION CHECKS PASSED
+
+  Summary:
+    [T1-T8]  Bridge Theorem 6.7 (Examples 1 & 2):
+       - Fisher matrices match paper exactly:
+           Ex1: I(theta*) = diag(1, 1/2, 1/2)         [Lemma 6.22]
+           Ex2: I(theta*) = diag(3/2, 6/5, 2/5, 2/5)  [Proposition 6.36]
+       - Closed-form leading coefficients verified
+           [Propositions 6.24, 6.38]
+       - Log-log slope = 2.000 +/- 0.01 in all 9 configurations
+       - O(eps^3) remainder confirmed: sup|R|/eps^3 < 10
+       - rel.err(eps) <= 0.8*eps for eps <= 0.03 (Validation criterion)
+       - Landauer bound S_obs >= 0 in all cases
+       - S_obs(eps) monotone non-decreasing in eps
+
+    [T9]    Off-center robustness (6+6=12 random base points):
+       - Quadratic scaling and O(eps^3) remainder confirmed at theta* != 0
+       - theta_1* in [-0.8, 0.8], RNG seed = 42
+
+    [T11.x] Fibre-theoretic foundation (Section 11):
+       - Push-pull left inverse  pi_* o pi^* = id
+       - Idempotence  (pi^* pi_*)^2 = pi^* pi_*
+       - Closed-form identity  S_obs^fib = log N - H_w  (Theorem 11.9)
+       - Unbalanced extension (Example 2 partition |A|=3, |B|=2)
+       - Range  0 <= S_obs^fib <= log N
+       - Equivalence with partition-threshold definition (Remark 11.11)
+
+    Figures generated:
+       Manuscript (referenced in v3.24.3):
+          fig1_bridge_theorem_verification.pdf
+          fig2_relative_error.pdf
+          fig3_resolution_information_tradeoff.pdf
+          fig4_bridge_theorem_ex2.pdf
+          fig5_relative_error_ex2.pdf
+          fig6_offcenter_ex1.pdf
+          fig7_offcenter_ex2.pdf
+       Supplementary diagnostics:
+          fig_supp_fisher_eigenvalues.pdf
+          fig_supp_landauer_budget.pdf
+          fig_supp_fibre_identity.pdf
+================================================================================
