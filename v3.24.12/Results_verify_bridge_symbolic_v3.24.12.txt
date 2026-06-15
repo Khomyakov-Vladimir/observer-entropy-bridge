@@ -1,0 +1,75 @@
+# Reproducibility run  2026-06-15T12:24:02.977923
+# Python: 3.12.3
+# SymPy: 1.13.1
+# Script: verify_bridge_symbolic_v3.24.12.py
+# Working directory: e:\Projects\observer_entropy_bridge_theorem_v3.24.12
+# Invocation: python scripts/verify_bridge_symbolic_v3.24.12.py
+# Recommended invocation (from repository root):
+# python scripts/verify_bridge_symbolic_v3.24.12.py
+
+=== (A) Cosh identity (Lemma 6.23): LHS - RHS ===
+  cosh identity: 0
+
+=== (B) Fisher Ex1 at theta*=0 : I - diag(1,1/2,1/2) ===
+  I1(0) = [[1, 0, 0], [0, 1/2, 0], [0, 0, 1/2]]
+  Ex1 Fisher residual: Matrix([[0, 0, 0], [0, 0, 0], [0, 0, 0]])
+
+=== (C) Fisher Ex2 at theta*=0 : I - diag(3/2,6/5,2/5,2/5) ===
+  I2(0) = [[3/2, 0, 0, 0], [0, 6/5, 0, 0], [0, 0, 2/5, 0], [0, 0, 0, 2/5]]
+  Ex2 Fisher residual: Matrix([[0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]])
+
+=== (D) Ex1 leading coefficient : 1/2 v^T I v - 1/4(a^2+b^2) ===
+  Ex1 coeff residual: 0
+    independent eps^2-coefficient check (Ex1):
+  Ex1 series eps^2 coeff residual: 0
+
+=== (E) Ex2 leading coefficient : 1/2 v^T I v - (3/5 a^2+1/5 b^2+1/5 g^2) ===
+  Ex2 coeff residual: 0
+    independent eps^2-coefficient check (Ex2):
+  Ex2 series eps^2 coeff residual: 0
+
+=== (F) Theorem 11.9 closed form : direct KL - (log N - H_w) ===
+  Theorem 11.9 residual (n=2, N=2): 0
+  Theorem 11.9 residual (n=3, N=2): 0
+  Theorem 11.9 residual (n=2, N=3): 0
+
+=== (G) Lemma 6.48 difference-Jacobian step (Steps a-d) ===
+
+  -- (G) case m = 2 (d_b = 1) --
+  (G,m=2) sum_k w_k - 1: 0
+  (G,m=2) center-of-mass  sum_k w_k(r_k-bar_r): Matrix([[0]])
+  (G1,m=2) det M - w_1: 0
+  (G1b,m=2) lower block of Mhat - M (# nonzero entries): 0
+  (G1c,m=2) det(lower block) - w_1: 0
+  (G,m=2) frame change  tilde_r_k - sum_l Mhat J_l (# nonzero entries): 0
+  (G2,m=2) W - Mhat^T D Mhat: Matrix([[0]])
+  (G2,m=2) I_bb - J W J^T (# nonzero entries): 0
+  (G2-orient,m=2) I_bb - J^T W J nonzero entries (degenerate: 1x1 block is symmetric, so 0 is expected): 0
+  (G3,m=2) J is the 1x1 block r_2 - r_1; invertible iff nonzero:
+  (G3,m=2) det J (= r2 - r1): -r1 + r2
+  (G3,m=2) W - w_1*w_2: 0
+
+  -- (G) case m = 3 (d_b = 2) --
+  (G,m=3) sum_k w_k - 1: 0
+  (G,m=3) center-of-mass  sum_k w_k(r_k-bar_r): Matrix([[0], [0]])
+  (G1,m=3) det M - w_1: 0
+  (G1b,m=3) lower block of Mhat - M (# nonzero entries): 0
+  (G1c,m=3) det(lower block) - w_1: 0
+  (G,m=3) frame change  tilde_r_k - sum_l Mhat J_l (# nonzero entries): 0
+  (G2,m=3) W - Mhat^T D Mhat: Matrix([[0, 0], [0, 0]])
+  (G2,m=3) I_bb - J W J^T (# nonzero entries): 0
+  (G2-orient,m=3) I_bb - J^T W J nonzero entries (informational, expected > 0 for non-symmetric J): 4
+  (G3,m=3) W symmetric and det W = w_1 w_2 w_3:
+  (G3,m=3) W - W^T: Matrix([[0, 0], [0, 0]])
+  (G3,m=3) det W - w_1 w_2 w_3: 0
+  (G3,m=3) det J (must be a nonzero polynomial, not identically 0):
+    det J = r1a*r2b - r1a*r3b - r1b*r2a + r1b*r3a + r2a*r3b - r2b*r3a
+  (G3,m=3) det J is a nonzero polynomial  (1 = OK, must be 1): 1
+  (G,m=3) Step (d) identity  (J^T u)^T W (J^T u) - u^T(J W J^T)u = 0:
+  (G,m=3) Step (d) quadratic-form identity: 0
+
+============================================================
+  SYMBOLIC PASS (PROVEN): every residual was decided exactly
+  (rational/polynomial normal form), with no reliance on the
+  randomized Schwartz-Zippel branch; det J (m=3) is a nonzero
+  polynomial (J invertible). No probabilistic verdicts were used.
